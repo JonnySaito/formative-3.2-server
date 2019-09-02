@@ -1,0 +1,26 @@
+{
+  "name": "formative-3.2-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonnySaito/formative-3.2-server.git"
+  },
+  "keywords": [
+    "node",
+    "mongo"
+  ],
+  "author": "John B",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JonnySaito/formative-3.2-server/issues"
+  },
+  "homepage": "https://github.com/JonnySaito/formative-3.2-server#readme",
+  "dependencies": {
+    "grunt": "^1.0.4"
+  }
+}
