@@ -36,7 +36,7 @@ app.post('/addProject', function(req, res){
     projectId: new mongoose.Types.ObjectId(),
     // authorId: req.body.author_id,						// we'll add validating author soon !
     authorName: req.body.author_name,
-    projectName: req.body.project_nane,
+    projectName: req.body.project_name,
 		screenshotURL: req.body.screenshot_URL
   });
 
