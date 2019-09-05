@@ -45,14 +45,14 @@ app.post('/addProject', function(req, res){
   }).catch(err => res.send(err));
 });
 
-// // Get all Projects
+// Get all Projects
 app.get('/allProjects', function(req, res){
     Project.find().then(result => {
         res.send(result);
     })
 })
 
-// //Get single Project based on ID
+// //Get a single Project based on ID
 app.post('/project/:id', function(req, res){
   const id = req.params.id;
 
@@ -66,7 +66,7 @@ app.post('/project/:id', function(req, res){
 
 });
 
-// //Get single Project based on ID
+// //Get update a single Project based on ID
 app.patch('/project/:id', function(req, res){
     const id = req.params.id;
 
@@ -85,7 +85,7 @@ app.patch('/project/:id', function(req, res){
     }).catch(err => res.send('cannot find a product with that id'));
 })
 
-// // Register Route
+// Register Route
 app.post('/authors', function(req, res){
     Author.findOne({ username: req.body.username }, function (err, checkAuthor) {
         if(checkAuthor){
@@ -100,6 +100,24 @@ app.post('/authors', function(req, res){
             author.save().then(result => {
                 res.send(result);
             }).catch(err => res.send(err));
+        }
+    });
+})
+
+app.post('/getAuthors', function(req, res){
+    Author.findOne({ username: req.body.username }, function (err, checkAuthor) {
+        if(checkAuthor){
+          if(bcrypt.compareSync(req.body.password, checkAuthor.password)){
+              // password matches the hased password and sends back the information about the user
+              res.send(checkAuthor);
+          } else {
+              // We found a user with the username you are asking for, but the password doesn't match
+              res.send('invalid password');
+          }
+        } else {
+            // A user doesnt exist
+            // The front end user needs to register before logging in
+            res.send('invalid user');
         }
     });
 })
