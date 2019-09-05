@@ -25,89 +25,85 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(cors());
 
-// //Home Route
-// app.get('/', function(req, res){
-//     res.send('Welcome to our project');
-// });
+//Home Route
+app.get('/', function(req, res){
+    res.send('Welcome to our project');
+});
 
 //Add a new Project
-// app.post('/addProject', function(req, res){
-//     console.log(req.body);
-//     const project = new Project({
-//     _id: new mongoose.Types.ObjectId(),
-//     authorId: req.body.author_id,
-//     authorName: req.body.author_name,
-//     projectName: req.body.project_name,
-// 		screenshotURL: req.body.screenshot_URL
-//   });
-//
-// 	project.save().then(result => {
-//       res.send(result);
-//   }).catch(err => res.send(err));
-// });
-//
+app.post('/addProject', function(req, res){
+  const product = new Project({
+    projectId: new mongoose.Types.ObjectId(),
+    // authorId: req.body.author_id,						// we'll add validating author soon !
+    authorName: req.body.author_name,
+    projectName: req.body.project_nane,
+		screenshotURL: req.body.screenshot_URL
+  });
+
+	product.save().then(result => {
+      res.send(result);
+  }).catch(err => res.send(err));
+});
+
 // // Get all Projects
-// app.get('/allProducts', function(req, res){
-//     Project.find().then(result => {
-//         res.send(result);
-//     })
-// })
-//
+app.get('/allProducts', function(req, res){
+    Project.find().then(result => {
+        res.send(result);
+    })
+})
+
 // //Get single Project based on ID
-// app.post('/project/:id', function(req, res){
-//   const id = req.params.id;
-//
-//   Project.findById(id, function(err, project) {
-//     if (project['authorId'] == req.body.author_name) {
-//       res.send(project)
-//     } else {
-//       res.send('401')
-//     }
-//   })
-//
-// });
-//
+app.post('/project/:id', function(req, res){
+  const id = req.params.id;
+
+  Project.findById(id, function(err, project) {
+    if (project['authorId'] == req.body.author_name) {
+      res.send(project)
+    } else {
+      res.send('401')
+    }
+  })
+
+});
+
 // //Get single Project based on ID
-// app.patch('/project/:id', function(req, res){
-//     const id = req.params.id;
-//
-//     Project.findById(id, function(err, product) {
-//       if (project['authorId'] == req.body.author_name) {
-//         const newUser = {
-//             authorName: req.body.author_name,
-//             projectName: req.body.project_name
-//         };
-//         Project.updateOne({ _id : id }, newUser).then(result => {
-//             res.send(result);
-//         }).catch(err => res.send(err));
-//       } else {
-//         res.send('401, permission denied')
-//       }
-//     }).catch(err => res.send('cannot find a product with that id'));
-// })
-//
+app.patch('/project/:id', function(req, res){
+    const id = req.params.id;
+
+    Project.findById(id, function(err, product) {
+      if (project['authorId'] == req.body.author_name) {
+        const newUser = {
+            authorName: req.body.author_name,
+            projectName: req.body.project_name
+        };
+        Project.updateOne({ _id : id }, newUser).then(result => {
+            res.send(result);
+        }).catch(err => res.send(err));
+      } else {
+        res.send('401, permission denied')
+      }
+    }).catch(err => res.send('cannot find a product with that id'));
+})
+
 // // Register Route
-// app.post('/Authors', function(req, res){
-//     User.findOne({ username: req.body.username }, function (err, checkUser) {
-//         if(checkUser){
-//             res.send('user already exists');
-//         } else {
-//             const hash = bcrypt.hashSync(req.body.password);
-//             const user = new User({
-//                 _id: new mongoose.Types.ObjectId(),
-//                 username: req.body.username,
-//                 email: req.body.email,
-//                 password: hash
-//             });
-//             user.save().then(result => {
-//                 res.send(result);
-//             }).catch(err => res.send(err));
-//         }
-//     });
-// })
-
-
-
+app.post('/authors', function(req, res){
+    User.findOne({ username: req.body.username }, function (err, checkUser) {
+        if(checkUser){
+            res.send('user already exists');
+        } else {
+            const hash = bcrypt.hashSync(req.body.password);
+            const user = new User({
+                _id: new mongoose.Types.ObjectId(),
+                username: req.body.username,
+                email: req.body.email,
+                password: hash
+            });
+            user.save().then(result => {
+                res.send(result);
+            }).catch(err => res.send(err));
+        }
+    });
+})
 
 
 
