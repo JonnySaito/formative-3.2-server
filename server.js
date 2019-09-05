@@ -32,7 +32,7 @@ app.get('/', function(req, res){
 
 //Add a new Project
 app.post('/addProject', function(req, res){
-  const product = new Project({
+  const project = new Project({
     projectId: new mongoose.Types.ObjectId(),
     // authorId: req.body.author_id,						// we'll add validating author soon !
     authorName: req.body.author_name,
