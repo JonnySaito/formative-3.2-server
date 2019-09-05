@@ -13,9 +13,6 @@ const Author = require('./models/authors');
 
 mongoose.connect(`mongodb+srv://${config.MONGO_USERNAME}:${config.MONGO_PASSWORD}@andycluster-f7t5s.mongodb.net/formative?retryWrites=true&w=majority`, {useNewUrlParser: true});
 
-const Project = require('./models/projects');
-const Author = require('./models/authors');;
-
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
