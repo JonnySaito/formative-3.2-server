@@ -40,13 +40,13 @@ app.post('/addProject', function(req, res){
 		screenshotURL: req.body.screenshot_URL
   });
 
-	product.save().then(result => {
+	project.save().then(result => {
       res.send(result);
   }).catch(err => res.send(err));
 });
 
 // // Get all Projects
-app.get('/allProducts', function(req, res){
+app.get('/allProjects', function(req, res){
     Project.find().then(result => {
         res.send(result);
     })
@@ -70,13 +70,13 @@ app.post('/project/:id', function(req, res){
 app.patch('/project/:id', function(req, res){
     const id = req.params.id;
 
-    Project.findById(id, function(err, product) {
+    Project.findById(id, function(err, project) {
       if (project['authorId'] == req.body.author_name) {
-        const newUser = {
+        const newProject = {
             authorName: req.body.author_name,
             projectName: req.body.project_name
         };
-        Project.updateOne({ _id : id }, newUser).then(result => {
+        Project.updateOne({ _id : id }, newProject).then(result => {
             res.send(result);
         }).catch(err => res.send(err));
       } else {
@@ -87,17 +87,17 @@ app.patch('/project/:id', function(req, res){
 
 // // Register Route
 app.post('/authors', function(req, res){
-    User.findOne({ username: req.body.username }, function (err, checkUser) {
-        if(checkUser){
+    Author.findOne({ username: req.body.username }, function (err, checkAuthor) {
+        if(checkAuthor){
             res.send('user already exists');
         } else {
             const hash = bcrypt.hashSync(req.body.password);
-            const user = new User({
+            const author = new Author({
                 _id: new mongoose.Types.ObjectId(),
                 username: req.body.username,
                 password: hash
             });
-            user.save().then(result => {
+            author.save().then(result => {
                 res.send(result);
             }).catch(err => res.send(err));
         }
