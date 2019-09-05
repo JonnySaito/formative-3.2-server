@@ -93,11 +93,11 @@ app.post('/authors', function(req, res){
         if(checkAuthor){
             res.send('user already exists');
         } else {
-            const hash = bcrypt.hashSync(req.body.password);
+            // const hash = bcrypt.hashSync(req.body.password);
             const author = new Author({
                 _id: new mongoose.Types.ObjectId(),
                 username: req.body.username,
-                password: hash
+                password: req.body.password
             });
             author.save().then(result => {
                 res.send(result);
