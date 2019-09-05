@@ -8,10 +8,11 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const config = require('./config.json');
+
+mongoose.connect(`mongodb+srv://katherine:19wdwu02@andycluster-f7t5s.mongodb.net/formative?retryWrites=true&w=majority`, {useNewUrlParser: true});
+
 const Project = require('./models/projects');
 const Author = require('./models/authors');;
-
-mongoose.connect(`mongodb+srv://${config.MONGO_USERNAME}:${config.MONGO_PASSWORD}@andycluster-f7t5s.mongodb.net/formative?retryWrites=true&w=majority`,  {useNewUrlParser: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -24,10 +25,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(cors());
 
-//Home Route
-app.get('/', function(req, res){
-    res.send('Welcome to our project');
-});
+// //Home Route
+// app.get('/', function(req, res){
+//     res.send('Welcome to our project');
+// });
 
 //Add a new Project
 // app.post('/addProject', function(req, res){
