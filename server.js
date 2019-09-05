@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs');
 
 const config = require('./config.json');
 
-mongoose.connect(`mongodb+srv://${config.MONGO_USER}:${config.MONGO_PASSWORD}@andycluster-f7t5s.mongodb.net/formative?retryWrites=true&w=majority`, {useNewUrlParser: true});
+mongoose.connect(`mongodb+srv://${config.MONGO_USERNAME}:${config.MONGO_PASSWORD}@andycluster-f7t5s.mongodb.net/formative?retryWrites=true&w=majority`, {useNewUrlParser: true});
 
 const Project = require('./models/projects');
 const Author = require('./models/authors');;
@@ -104,8 +104,6 @@ app.post('/authors', function(req, res){
         }
     });
 })
-
-
 
 app.listen(port, () => {
     // console.clear();
