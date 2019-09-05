@@ -95,7 +95,6 @@ app.post('/authors', function(req, res){
             const user = new User({
                 _id: new mongoose.Types.ObjectId(),
                 username: req.body.username,
-                email: req.body.email,
                 password: hash
             });
             user.save().then(result => {
